@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------------
+# ./docker-compose.yml
+#
+# Docker Compose configuration for containerized Basilisk
+# GN&C simulation workflows.
+#
+# Author:       Anubhav Gupta
+# Affiliation:  University of Colorado Boulder
+#               In Orbit Aerospace Inc.
+# Organization: Infinite Labs
+# License:      MIT
+# ---------------------------------------------------------------------
+
+services:
+  bsk:
+    container_name: basilisk_gnc
+    image: bsk_img
+    build:
+      context: ./docker
+    working_dir: /app/workspace
+    env_file:
+      - .env
+    volumes:
+      - type: bind
+        source: .
+        target: /app/workspace
+    tty: true
+    stdin_open: true
