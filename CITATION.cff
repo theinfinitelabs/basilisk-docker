@@ -9,8 +9,7 @@ abstract: >
   dependencies, and simulation infrastructure within a portable container
   image. Demonstrated through a progression of simulation scenarios of
   increasing complexity, from standalone orbital dynamics scripts to
-  BSKSim-based attitude dynamics and control simulations with Monte Carlo
-  analysis.
+  BSKSim-based attitude dynamics and control simulations.
 
 authors:
   - family-names: Gupta
@@ -34,7 +33,6 @@ keywords:
   - containerization
   - orbital mechanics
   - attitude control
-  - Monte Carlo
 
 references:
   - type: article
@@ -43,7 +41,7 @@ references:
       - family-names: Gupta
         given-names: Anubhav
     year: 2026
-    notes: "Submitted to arXiv, May 2026"
+    note: "Submitted to arXiv, May 2026"
 
   - type: conference-paper
     title: "Basilisk and Docker for Streamlined GN&C Simulation"
