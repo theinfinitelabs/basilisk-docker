@@ -70,6 +70,8 @@ docker exec -it basilisk_gnc bash
 - The `de430.bsp` SPICE ephemeris file is not included 
   due to size; see Section 3 of the companion paper 
   for retrieval instructions
+- Running each scenario generates a .bin file in the same
+  directory, which can be opened in Vizard for 3D visualization.
 
 ## Development History
 
