@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+
+title: "Basilisk and Docker for Reproducible GN&C Simulation"
+abstract: >
+  A Docker-based containerization workflow for the Basilisk astrodynamics
+  simulation framework. Encapsulates the complete build environment,
+  dependencies, and simulation infrastructure within a portable container
+  image. Demonstrated through a progression of simulation scenarios of
+  increasing complexity, from standalone orbital dynamics scripts to
+  BSKSim-based attitude dynamics and control simulations with Monte Carlo
+  analysis.
+
+authors:
+  - family-names: Gupta
+    given-names: Anubhav
+    email: anubhav.gupta@colorado.edu
+    affiliation: "University of Colorado Boulder; In Orbit Aerospace Inc."
+
+repository-code: "https://github.com/theinfinitelabs/basilisk-docker"
+license: MIT
+
+version: "1.0.0"
+date-released: "2026-05-11"
+
+keywords:
+  - Basilisk
+  - Docker
+  - astrodynamics
+  - spacecraft simulation
+  - GN&C
+  - reproducibility
+  - containerization
+  - orbital mechanics
+  - attitude control
+  - Monte Carlo
+
+references:
+  - type: article
+    title: "Basilisk and Docker for Reproducible GN&C Simulation: A Workflow Reference"
+    authors:
+      - family-names: Gupta
+        given-names: Anubhav
+    year: 2026
+    notes: "Submitted to arXiv, May 2026"
+
+  - type: conference-paper
+    title: "Basilisk and Docker for Streamlined GN&C Simulation"
+    authors:
+      - family-names: Gupta
+        given-names: Anubhav
+    conference:
+      name: "46th Rocky Mountain AAS GN&C Conference"
+      location: "Breckenridge, CO, USA"
+    year: 2024
+    doi: "10.5281/zenodo.15008785"
