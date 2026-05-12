@@ -33,7 +33,8 @@ basilisk-docker/
 ├── CITATION.cff
 ├── docker-compose.yml
 ├── LICENSE
-└── README.md
+├── README.md
+└── RELEASE_NOTES.md
 ```
 
 ## Requirements
@@ -44,7 +45,7 @@ basilisk-docker/
 ## Quick Start
 
 ```bash
-git clone https://github.com/infinitelabs/basilisk-docker
+git clone https://github.com/theinfinitelabs/basilisk-docker.git
 cd basilisk-docker
 ./build-basilisk.sh
 ```
@@ -90,13 +91,13 @@ MIT License. See [LICENSE](LICENSE) for details.
 If you use this workflow in your research, please cite:
 
 ```bibtex
-@misc{gupta2026basilisk,
+@software{gupta2026basilisk,
   author       = {Gupta, Anubhav},
-  title        = {Basilisk and Docker for Reproducible 
-                  {GN\&C} Simulation: A Workflow Reference},
+  title        = {Basilisk and Docker for Reproducible GN\&C Simulation},
   year         = {2026},
-  note         = {arXiv preprint},
-  url          = {https://arxiv.org/abs/XXXX}
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.20132421},
+  url          = {https://github.com/theinfinitelabs/basilisk-docker}
 }
 ```
 

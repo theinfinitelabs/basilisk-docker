@@ -8,5 +8,5 @@
     - module_variable_lifecycle.py — Section 4.3
     - message_connection_recording.py — Section 4.4
     - scenario_spacecraft.py — Section 5.2
-    - scenario_earth_orbit.py — Section 5.3  
+    - scenario_earth_orbit.py — Section 5.3 + 5.5
     - scenario_sun_earth.py — Section 5.4
