@@ -37,22 +37,31 @@ def run(time_step, simulation_time, use_spherical_harmonics=True):
     grav_bodies = grav_factory.createBodies(['sun', 'earth'])
     grav_bodies['earth'].isCentralBody = True
 
+    # Assign identity to both celestial bodies
+    sun = 0
+    earth = 1
+
+    if use_spherical_harmonics:
+        grav_bodies['earth'].useSphericalHarmonicsGravityModel(bskPath + '/supportData/LocalGravData/GGM03S-J2-only.txt', 2)
+
     time_init = "2000 Jan 1 11:59:28.000 (UTC)"
+    spacecraft_obj.gravField.gravBodies = spacecraft.GravBodyVector(list(grav_factory.gravBodies.values()))
     grav_factory.createSpiceInterface(
         bskPath + '/supportData/EphemerisData/',
         time_init, epochInMsg=True)
     epoch_msg = grav_factory.epochMsg
-
+    simulation_obj.AddModelToTask("simulation_task", grav_factory.spiceObject)
+    
     earth_ephem = ephemerisConverter.EphemerisConverter()
     simulation_obj.AddModelToTask("simulation_task", earth_ephem)
+    
     grav_factory.spiceObject.zeroBase = 'Earth'
-    earth_ephem.addSpiceInputMsg(grav_factory.spiceObject.planetStateOutMsgs[1])
+    earth_ephem.addSpiceInputMsg(grav_factory.spiceObject.planetStateOutMsgs[earth])
 
     pyswice.furnsh_c(grav_factory.spiceObject.SPICEDataPath + 'de430.bsp')  # solar system bodies
     pyswice.furnsh_c(grav_factory.spiceObject.SPICEDataPath + 'naif0012.tls')  # leap second file
     pyswice.furnsh_c(grav_factory.spiceObject.SPICEDataPath + 'de-403-masses.tpc')  # solar system masses
     pyswice.furnsh_c(grav_factory.spiceObject.SPICEDataPath + 'pck00010.tpc')  # generic Planetary Constants
-
     
     mu = grav_factory.gravBodies['earth'].mu
     
@@ -64,19 +73,19 @@ def run(time_step, simulation_time, use_spherical_harmonics=True):
     oe.Omega = 48.2  * macros.D2R
     oe.omega = 347.8 * macros.D2R
     oe.f     = 85.3  * macros.D2R
-    position_inertial, velocity_inertial = orbitalMotion.elem2rv(mu, oe)
     
-    spacecraft_obj.hub.r_CN_NInit = position_inertial       # m   - r_BN_N
-    spacecraft_obj.hub.v_CN_NInit = velocity_inertial       # m/s - v_BN_N
+    r_N, v_N = orbitalMotion.elem2rv(mu, oe)
+    spacecraft_obj.hub.r_CN_NInit = r_N
+    spacecraft_obj.hub.v_CN_NInit = v_N
 
-    mean_motion = np.sqrt(mu / oe.a / oe.a / oe.a)
-    orbital_period_seconds = 2. * np.pi / mean_motion
+    n = np.sqrt(mu / oe.a**3)
+    T = 2. * np.pi / n
 
     if use_spherical_harmonics:
-        simulation_time = macros.sec2nano(3. * orbital_period_seconds)
+        simulation_time = macros.sec2nano(3. * T)
     else:
-        simulation_time = macros.sec2nano(0.75 * orbital_period_seconds)
-    
+        simulation_time = macros.sec2nano(0.75 * T)
+
     viz = vizSupport.enableUnityVisualization(simulation_obj,
                                         "simulation_task",
                                         spacecraft_obj,
